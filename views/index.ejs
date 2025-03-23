@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= eventName %> - Interactive Photo Booth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+</head>
+<body class="theme-<%= locals.theme || 'default' %>">
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <h2>Loading Experience...</h2>
+  </div>
+  
+  <div id="three-container"></div>
+  
+  <div class="app-container">
+    <header>
+      <div class="logo">
+        <h1><%= eventName %></h1>
+        <p class="tagline">Capture the Moment in 3D</p>
+      </div>
+    </header>
+    
+    <main>
+      <div class="booth-container">
+        <div class="booth-frame">
+          <div id="preview-container">
+            <div id="camera-feed">
+              <div class="camera-placeholder">
+                <span>Camera Preview</span>
+              </div>
+            </div>
+            
+            <div id="countdown" class="hidden">
+              <span>3</span>
+            </div>
+            
+            <div id="flash" class="hidden"></div>
+          </div>
+          
+          <div class="controls">
+            <button id="capture-btn" class="main-btn">Take Photo</button>
+            <div class="secondary-controls">
+              <button id="upload-btn" class="action-btn" disabled>Upload</button>
+              <button id="retake-btn" class="action-btn" disabled>Retake</button>
+            </div>
+            <!-- Add this file input for image upload -->
+            <input type="file" id="file-input" accept="image/*" style="display: none;">
+            <button id="upload-from-device" class="action-btn">Upload from Device</button>
+          </div>
+          </div>
+        </div>
+        
+        <div class="gallery-container hidden">
+          <h2>Your Photos</h2>
+          <div id="gallery"></div>
+        </div>
+      </div>
+    </main>
+    
+    <div id="success-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Successfully Uploaded!</h2>
+        <div id="uploaded-image-container">
+          <img id="uploaded-image" src="" alt="Uploaded photo">
+        </div>
+        <div class="share-options">
+          <button class="share-btn">Share</button>
+          <input type="text" id="image-url" readonly>
+        </div>
+        <button id="close-modal" class="action-btn">Done</button>
+      </div>
+    </div>
+    
+    <div id="error-toast" class="toast hidden">
+      <p>Error message goes here</p>
+    </div>
+  </div>
+  
+  <script src="/js/main.js"></script>
+</body>
+</html>
